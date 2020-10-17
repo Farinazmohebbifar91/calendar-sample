@@ -1,0 +1,39 @@
+:host::ng-deep {
+  .split-wrapper {
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+    font-size: small;
+    text-decoration: underline;
+
+    .btn-split {
+      cursor: pointer;
+    }
+    .btn-split:hover {
+      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .fc-axis.fc-widget-header, .fc-day-header.fc-widget-header {
+    background-color: #171d21;
+    color: white;
+    font-weight: normal;
+    height: 1.5rem;
+    vertical-align: middle;
+  }
+
+  .fc-event {
+    opacity: 0.8 !important;
+    border-radius: 0.4rem;
+  }
+
+  .fc td
+  {
+    background-color: white;
+  }
+
+}
+
+#btnSplitCaller {
+  display: none;
+}

@@ -1,0 +1,14 @@
+<full-calendar #calender
+[events]="calendarEvents"
+defaultView="timeGridDay"
+[minTime]="'07:00'"
+[maxTime]="'18:00'"
+[height]="620"
+[locale]="'de'"
+[titleFormat]="{ day: 'numeric', month: 'long' } "
+[plugins]="calendarPlugins"></full-calendar>
+
+
+<button id="btnSplitCaller" callerId="0" (click)="eventSplitClick($event)">
+  Split
+</button>
