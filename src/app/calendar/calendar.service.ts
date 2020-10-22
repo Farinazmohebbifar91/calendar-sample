@@ -17,17 +17,21 @@ export class CalendarService {
     return this.http.get<Array<EventInput>>(url, {params});
   }
 
-  addWorklog(event: EventInput): Observable<string> {
-    return this.http.post<string>('http://localhost:3000/api/worklogs', event);
+  addWorklog(event: EventInput): Observable<{message: string}> {
+    return this.http.post<{message: string}>('http://localhost:3000/api/worklogs', event);
   }
 
-  updateWorklog(event: EventApi): Observable<string> {
+  updateWorklog(event: EventApi): Observable<{message: string}> {
     const newEvent: EventInput = {
       id: event.id,
       title: event.title,
       start: event.start,
       end: event.end
     };
-    return this.http.put<string>(`http://localhost:3000/api/worklogs/${event.id}`, newEvent);
+    return this.http.put<{message: string}>(`http://localhost:3000/api/worklogs/${event.id}`, newEvent);
+  }
+
+  removeWorklog(eventId: string): Observable<{message: string}> {
+    return this.http.delete<{message: string}>(`http://localhost:3000/api/worklogs/${eventId}`);
   }
 }

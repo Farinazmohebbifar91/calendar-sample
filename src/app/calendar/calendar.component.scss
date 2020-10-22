@@ -8,11 +8,27 @@
 
     .btn-split {
       cursor: pointer;
+      position: relative;
+
+    }
+    .btn-delete {
+      cursor: pointer;
+      position: relative;
+      right: 150px;
     }
     .btn-split:hover {
       box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     }
   }
+
+  // .btn-delete {
+  //   cursor: pointer;
+  //   position: absolute;
+  //   bottom: 15px;
+  //   right: 100px;
+  //   font-size: small;
+  //   text-decoration: underline;
+  // }
 
   .fc-axis.fc-widget-header, .fc-day-header.fc-widget-header {
     background-color: #171d21;
@@ -32,6 +48,11 @@
     background-color: white;
   }
 
+  .sumHours {
+    width: 100%;
+    padding: 5px;
+    font-size: small;
+  }
 }
 
 #btnSplitCaller {

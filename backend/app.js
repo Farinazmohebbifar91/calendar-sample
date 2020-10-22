@@ -52,12 +52,10 @@ app.get("/api/worklogs", (req, res) => {
   res.status(200).json(this.worklogs);
 });
 
-
 app.put("/api/worklogs/:id", (req, res) => {
   const current=this.worklogs.findIndex(i => i.id === req.params.id);
   this.worklogs.splice(current, 1);
   this.worklogs.push(req.body);
-
   res.status(201).json({
     message: 'worklog added successfully'
   });
@@ -68,6 +66,15 @@ app.post("/api/worklogs", (req, res) => {
 
   res.status(201).json({
     message: 'worklog added successfully'
+  });
+});
+
+app.delete("/api/worklogs/:id", (req, res) => {
+  const current=this.worklogs.findIndex(i => i.id === req.params.id);
+  this.worklogs.splice(current, 1);
+
+  res.status(201).json({
+    message: 'worklog was delete'
   });
 });
 

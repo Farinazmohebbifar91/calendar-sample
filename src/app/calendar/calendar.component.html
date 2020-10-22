@@ -5,10 +5,14 @@ defaultView="timeGridDay"
 [maxTime]="'18:00'"
 [height]="620"
 [locale]="'de'"
+[editable]="true"
 [titleFormat]="{ day: 'numeric', month: 'long' } "
 [plugins]="calendarPlugins"></full-calendar>
 
 
 <button id="btnSplitCaller" callerId="0" (click)="eventSplitClick($event)">
   Split
+</button>
+<button id="btnDeleteCaller" callerId="0" (click)="eventDeleteClick($event)">
+  Delete
 </button>
