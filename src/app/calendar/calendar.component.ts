@@ -112,8 +112,14 @@ export class CalendarComponent implements OnInit {
     };
 
     selectedEvent.setEnd(newEnd.toISOString());
+    const newEvent: EventInput = {
+      id: selectedEvent.id,
+      title: selectedEvent.title,
+      start: selectedEvent.start,
+      end: selectedEvent.end
+    };
 
-    combineLatest(this.calendarService.updateWorklog(selectedEvent),
+    combineLatest(this.calendarService.updateWorklog(newEvent),
                   this.calendarService.addWorklog(pauseEvent),
                   this.calendarService.addWorklog(thirdEvent))
                   .subscribe(([first, second, third]) => {
@@ -125,6 +131,26 @@ export class CalendarComponent implements OnInit {
 
   eventDeleteClick(e: any): void {
     const selectedEvent = this.calendarComponent.getApi().getEventById(e.target.callerId);
+
+    if (selectedEvent.title === 'Pause') {
+      const previous = this.calendarEvents.findIndex(i => moment(i.end).toISOString() === moment(selectedEvent.start).toISOString());
+      const next = this.calendarEvents.findIndex(i => moment(i.start).toISOString() === moment(selectedEvent.end).toISOString());
+
+      if (previous > -1  && next > -1) {
+      const duration = moment(this.calendarEvents[next].end).diff(this.calendarEvents[next].start, 'hours');
+      this.calendarEvents[previous].end = moment(this.calendarEvents[previous].end)
+        .clone()
+        .add(duration, 'hour').toISOString();
+
+      combineLatest(this.calendarService.updateWorklog(this.calendarEvents[previous]),
+      this.calendarService.removeWorklog(this.calendarEvents[next].id))
+        .subscribe(([first, second]) => {
+          if (first.message.length && second.message.length) {
+            this.getWorklogs();
+          }
+        });
+      }
+    }
     this.calendarService.removeWorklog(selectedEvent.id)
     .subscribe((data) => {
       this.getWorklogs();
@@ -135,10 +161,7 @@ export class CalendarComponent implements OnInit {
     let result = 0;
     this.calendarEvents.forEach((eventInfo: EventInput) => {
       if (eventInfo.title === 'Pause') {
-        const yy = moment(eventInfo.end).year() === moment(end).year();
-        const mm = moment(eventInfo.end).month() === moment(end).month();
-        const dd = moment(eventInfo.end).date() === moment(end).date();
-        if (yy && mm && dd) {
+        if (this.isSameDate(eventInfo.end, end)) {
           result += moment(eventInfo.end).diff(eventInfo.start, 'hours');
         }
       }
@@ -150,14 +173,19 @@ export class CalendarComponent implements OnInit {
     let result = 0;
     this.calendarEvents.forEach((eventInfo: EventInput) => {
       if (eventInfo.title !== 'Pause') {
-        const yy = moment(eventInfo.end).year() === moment(end).year();
-        const mm = moment(eventInfo.end).month() === moment(end).month();
-        const dd = moment(eventInfo.end).date() === moment(end).date();
-        if (yy && mm && dd) {
+        if (this.isSameDate(eventInfo.end, end)) {
           result += moment(eventInfo.end).diff(eventInfo.start, 'hours');
         }
       }
     });
     return result;
+  }
+
+  private isSameDate(firstDate, secondDate): boolean {
+    const yy = moment(firstDate).year() === moment(secondDate).year();
+    const mm = moment(firstDate).month() === moment(secondDate).month();
+    const dd = moment(firstDate).date() === moment(secondDate).date();
+
+    return yy && mm && dd;
   }
 }

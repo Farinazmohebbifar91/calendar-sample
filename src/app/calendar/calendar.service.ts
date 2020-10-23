@@ -21,17 +21,11 @@ export class CalendarService {
     return this.http.post<{message: string}>('http://localhost:3000/api/worklogs', event);
   }
 
-  updateWorklog(event: EventApi): Observable<{message: string}> {
-    const newEvent: EventInput = {
-      id: event.id,
-      title: event.title,
-      start: event.start,
-      end: event.end
-    };
-    return this.http.put<{message: string}>(`http://localhost:3000/api/worklogs/${event.id}`, newEvent);
+  updateWorklog(event: EventInput): Observable<{message: string}> {
+    return this.http.put<{message: string}>(`http://localhost:3000/api/worklogs/${event.id}`, event);
   }
 
-  removeWorklog(eventId: string): Observable<{message: string}> {
+  removeWorklog(eventId: string | number): Observable<{message: string}> {
     return this.http.delete<{message: string}>(`http://localhost:3000/api/worklogs/${eventId}`);
   }
 }

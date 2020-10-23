@@ -32,20 +32,20 @@ app.get("/api/worklogs", (req, res) => {
     {
       id: 'Event_1',
       title: 'projekt',
-      start: moment().hour(8).minute(0).toISOString(),
-      end: moment().hour(16).minute(0).toISOString()
+      start: moment().hour(8).minute(0).second(0).toISOString(),
+      end: moment().hour(16).minute(0).second(0).toISOString()
     },
     {
       id: 'Event_2',
       title: 'Event_2',
-      start: moment().add(1,'day').hour(9).minute(0).toISOString(),
-      end:  moment().add(1,'day').hour(11).minute(0).toISOString()
+      start: moment().add(1,'day').hour(9).minute(0).second(0).toISOString(),
+      end:  moment().add(1,'day').hour(11).minute(0).second(0).toISOString()
     },
     {
       id: 'Event_3',
       title: 'Event 3',
-      start: moment().add(2,'day').hour(9).minute(0).toISOString(),
-      end:  moment().add(2,'day').hour(16).minute(0).toISOString()
+      start: moment().add(2,'day').hour(9).minute(0).second(0).toISOString(),
+      end:  moment().add(2,'day').hour(16).minute(0).second(0).toISOString()
     }
   ];
 }

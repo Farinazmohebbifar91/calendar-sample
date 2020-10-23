@@ -19,16 +19,8 @@
     .btn-split:hover {
       box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     }
-  }
 
-  // .btn-delete {
-  //   cursor: pointer;
-  //   position: absolute;
-  //   bottom: 15px;
-  //   right: 100px;
-  //   font-size: small;
-  //   text-decoration: underline;
-  // }
+  }
 
   .fc-axis.fc-widget-header, .fc-day-header.fc-widget-header {
     background-color: #171d21;
@@ -53,8 +45,12 @@
     padding: 5px;
     font-size: small;
   }
+
+  .fc-event div.fc-content {
+    width: 600px;
+  }
 }
 
-#btnSplitCaller {
+#btnSplitCaller, #btnDeleteCaller {
   display: none;
 }
